@@ -1,17 +1,17 @@
-import { buildCreateSlice, createAsyncThunk, createEntityAdapter, createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createEntityAdapter, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getAllCategory = createAsyncThunk( 
     "category/getAllCategory",    
-    async  ( ) => { 
+    async ( ) => { 
         const response = await axios.get("/categories");
         return response.data;
     }
 );
 
 const categoryEntity = createEntityAdapter({
-    selectIdname: (category ) => category.id,
-})
+    selectId: (category) => category.id,
+});
 
 const categorySlice = createSlice({
     name: "category",
@@ -21,10 +21,10 @@ const categorySlice = createSlice({
         builder.addCase(getAllCategory.fulfilled, (state, action) => {
             categoryEntity.setAll(state, action.payload );
         })
-        }
+        },
      })
-export const categorySelectors = categoryEntity.getSelectors   (
-    ( state)  => state.category
+export const categorySelectors = categoryEntity.getSelectors(
+    (state)  => state.category
  ) 
 export default categorySlice.reducer;
   //. , ; : !  =>? ' " [] ]( )  { } - _ = + / \ | @ # $ % ^ & * ~ `
