@@ -9,7 +9,7 @@
 
   },
   "scripts": {
-    "start": "npx json-server --watch db.json --port 7000"
+    "start": "npx json-server --watch db.json --port 5000"
   }
 }
 
